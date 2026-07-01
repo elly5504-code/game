@@ -607,15 +607,19 @@
   background: rgba(0, 0, 0, 0.25);
 }
 .lp-mugshot-name {
-  font-family: var(--font-file);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.12rem;
+  /* 한글 포함 → 한글 지원 폰트(Pretendard)로. Special Elite는 한글 글리프가 없어 깨짐 */
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.04rem;
   color: var(--color-gold);
 }
 .lp-mugshot-job {
-  font-family: var(--font-mono);
+  /* '신원 미상 · CLASSIFIED' 한글 포함 → Pretendard */
+  font-family: var(--font-body);
   font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
   color: var(--color-text-dim);
 }
 
@@ -645,10 +649,10 @@
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
-  font-family: var(--font-file);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08rem;
   color: var(--color-accent);
   border: 2px solid var(--color-accent);
   border-radius: 3px;
@@ -669,9 +673,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  font-family: var(--font-file);
-  font-size: 0.92rem;
-  letter-spacing: 0.03rem;
+  /* 한글 문장 → Pretendard로 통일 (typewriter 폰트는 한글 미지원으로 깨짐) */
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01rem;
   color: var(--color-gold);
   text-align: center;
   word-break: keep-all;
