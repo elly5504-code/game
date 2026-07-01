@@ -96,7 +96,6 @@ function Landing() {
                 <span>수사 시작하기</span>
                 <IconChevron className="lp-btn-arrow" style={{ width: '1.1rem', height: '1.1rem', transform: 'rotate(-90deg)' }} />
               </Link>
-              <a href="#how" className="lp-btn lp-btn-ghost">플레이 방법 보기</a>
             </div>
             <div className="lp-hero-meta">
               <span><IconUsers style={{ width: '0.95rem', height: '0.95rem' }} /> 혼자 또는 함께</span>
