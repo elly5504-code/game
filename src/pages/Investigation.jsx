@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../styles/page.css'
 import '../styles/investigation.css'
@@ -159,6 +159,23 @@ const IconClose = (props) => (
   </svg>
 )
 
+const IconAlert = (props) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+    {...props}
+  >
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+    <path d="M12 9v4M12 17h.01" />
+  </svg>
+)
+
 function Investigation() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -176,6 +193,8 @@ function Investigation() {
   const [selectedStatementName, setSelectedStatementName] = useState('')
   const [unlockNotice, setUnlockNotice] = useState(null)
   const [showsGuide, setShowsGuide] = useState(true)
+  // 최종 추리 시작 전 '미확인 단서' 확인 모달
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   // 증거 데이터에 id 부여 (체크 추적용)
   const evidences = (caseData.evidence || []).map((ev, idx) => ({
@@ -199,6 +218,29 @@ function Investigation() {
   // 확인한 증거 개수
   const checkedCount = Object.values(checkedEvidence).filter(Boolean).length
   const totalEvidence = evidences.length
+  const remainingCount = Math.max(totalEvidence - checkedCount, 0)
+  const hasUncheckedEvidence = checkedCount < totalEvidence
+
+  const goToReport = () => navigate('/report', { state: { caseId } })
+
+  // '최종 추리 시작' 클릭: 미확인 단서가 남아 있으면 확인 모달, 아니면 바로 이동
+  const handleFinalStart = () => {
+    if (hasUncheckedEvidence) {
+      setConfirmOpen(true)
+    } else {
+      goToReport()
+    }
+  }
+
+  // 확인 모달: ESC 키로 닫기
+  useEffect(() => {
+    if (!confirmOpen) return
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setConfirmOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [confirmOpen])
 
   const handleEvidenceClick = (evidence) => {
     setSelectedStatementName('')
@@ -632,7 +674,7 @@ function Investigation() {
           <button
             type="button"
             className="inv-final-btn"
-            onClick={() => navigate('/report', { state: { caseId } })}
+            onClick={handleFinalStart}
           >
             최종 추리 시작
           </button>
@@ -643,6 +685,64 @@ function Investigation() {
             </Link>
           </div>
         </div>
+
+        {/* 최종 추리 시작 전 '미확인 단서' 확인 모달 */}
+        {confirmOpen && (
+          <div
+            className="guide-modal-overlay"
+            onClick={() => setConfirmOpen(false)}
+          >
+            <div
+              className="guide-modal-content inv-confirm-modal"
+              onClick={(e) => e.stopPropagation()}
+              role="alertdialog"
+              aria-modal="true"
+              aria-labelledby="inv-confirm-title"
+              aria-describedby="inv-confirm-desc"
+            >
+              <span
+                className="ds-metal-clip"
+                aria-hidden="true"
+                style={{ top: '-4px', left: '50%', transform: 'translateX(-50%)' }}
+              ></span>
+
+              <div className="inv-confirm-icon" aria-hidden="true">
+                <IconAlert style={{ width: '1.9rem', height: '1.9rem' }} />
+              </div>
+
+              <header className="inv-confirm-head">
+                <h2 id="inv-confirm-title">아직 확인되지 않은 단서가 남아 있습니다</h2>
+                <p id="inv-confirm-desc">지금 최종 추리를 시작하시겠습니까?</p>
+              </header>
+
+              <div className="inv-confirm-count" aria-hidden="true">
+                <IconClip className="inv-confirm-count-icon" />
+                증거 확인 <strong>{checkedCount} / {totalEvidence}</strong>
+                <span className="inv-confirm-remain">미확인 {remainingCount}건</span>
+              </div>
+
+              <div className="inv-confirm-actions">
+                <button
+                  type="button"
+                  className="inv-confirm-btn-no"
+                  onClick={() => setConfirmOpen(false)}
+                >
+                  계속 조사하기
+                </button>
+                <button
+                  type="button"
+                  className="inv-confirm-btn-yes"
+                  onClick={() => {
+                    setConfirmOpen(false)
+                    goToReport()
+                  }}
+                >
+                  최종 추리 시작
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 증거 해금 알림 */}
         {unlockNotice && (
