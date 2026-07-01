@@ -1,0 +1,7 @@
+const fs = require('fs')
+const f = fs.readFileSync('src/pages/CaseSelect.jsx', 'utf8')
+const oldStr = '        </p>\n\n        {/* \u0ad0 \u0ad1'
+const newStr = '        </p>\n\n        {/* \ub3db\ubcf4\uae30 \uc7a5\uc2dd (\uc624\ub978\ucabd \uc544\ub798 \ube48 \uacf5\uac04) */}\n        <div className="ds-magnifier" aria-hidden="true">\n          <span className="ds-magnifier-handle" />\n        </div>\n\n        {/* \u0ad0 \u0ad1'
+const result = f.replace(oldStr, newStr)
+fs.writeFileSync('src/pages/CaseSelect.jsx', result, 'utf8')
+console.log('done')

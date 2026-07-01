@@ -1,0 +1,10 @@
+const fs = require('fs')
+const path = 'src/pages/CaseSelect.jsx'
+const f = fs.readFileSync(path, 'utf8')
+
+const oldStr = '담당할 사건을 선택하세요.</span>\n        </p>\n\n        {/*'
+const newStr = '담당할 사건을 선택하세요.</span>\n        </p>\n\n        {/* 돋보기 장식 (오른쪽 아래 빈 공간) */}\n        <div className="ds-magnifier" aria-hidden="true">\n          <span className="ds-magnifier-handle" />\n        </div>\n\n        {/*'
+
+const result = f.replace(oldStr, newStr)
+fs.writeFileSync(path, result, 'utf8')
+console.log('done')

@@ -1,0 +1,364 @@
+/* ===== Main 화면 전용 스타일 (Case File 컨셉) ===== */
+
+/* 인트로 / 로고 공통 화면 */
+.intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #1a130e 0%, #0c0906 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  font-family: var(--font-body);
+}
+
+/* ===== 로딩 화면 ===== */
+.intro-loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideIn 0.6s ease forwards;
+  background: #ecdcb9;
+  background-image: var(--paper-noise);
+  padding: 3rem 4rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  border: 1px dashed #7a6e53;
+  position: relative;
+}
+
+.intro-loading-box::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(139, 90, 43, 0.2);
+}
+
+.intro-loading-label {
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+  color: #a22;
+  border: 4px double #a22;
+  padding: 0.3rem 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: var(--font-file);
+  transform: rotate(-3deg);
+  margin-bottom: 0.5rem;
+}
+
+.intro-text {
+  color: #2b2319;
+  font-size: 1.1rem;
+  letter-spacing: 0.15rem;
+  font-family: var(--font-file);
+  display: inline-flex;
+  align-items: baseline;
+  text-transform: uppercase;
+}
+
+/* 로딩 점 애니메이션 */
+.intro-dots {
+  display: inline-flex;
+  gap: 0.2rem;
+  margin-left: 0.15rem;
+}
+
+.intro-dot {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: #a22;
+  opacity: 0.3;
+  animation: dotPulse 1.2s infinite;
+}
+
+.intro-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.intro-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ===== 로고 화면 ===== */
+.logo-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  animation: logoFadeIn 0.8s ease forwards;
+  background: #eddcb9;
+  background-image: var(--paper-noise);
+  padding: 4rem 5rem;
+  border-radius: 2px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.9);
+  border: 1px solid #c8b99c;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.logo-screen::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid rgba(80, 50, 20, 0.15);
+}
+
+.logo-title {
+  font-size: 3.5rem;
+  letter-spacing: 0.45rem;
+  color: #1a1511;
+  font-weight: 700;
+  font-family: var(--font-title);
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+}
+
+.logo-subtitle {
+  font-size: 1rem;
+  letter-spacing: 0.35rem;
+  color: #4a3e35;
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+}
+
+.logo-divider {
+  width: 150px;
+  height: 2px;
+  background: #5c4b37;
+  margin-bottom: 2rem;
+  opacity: 0.5;
+}
+
+.logo-confidential {
+  font-size: 1.8rem;
+  letter-spacing: 0.45rem;
+  color: #a22;
+  border: 5px double #a22;
+  padding: 0.55rem 1.8rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: var(--font-file);
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+  animation-delay: 0.4s;
+  transform: rotate(-6deg);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+@keyframes logoFadeIn {
+  from { opacity: 0; transform: translateY(12px) rotate(1deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 메인 화면 ===== */
+.main-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: var(--font-body);
+  opacity: 0;
+  animation: mainFadeIn 0.8s ease forwards;
+}
+
+@keyframes mainFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 대단한 마닐라지 기밀 사건 서류철 덮개 디자인 */
+.main-content {
+  text-align: center;
+  background-color: #dfcdb4;
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  max-width: 680px;
+  width: 100%;
+  padding: 5rem 3rem 4rem;
+  color: #1c1712;
+  border-radius: 4px 30px 4px 4px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.4),
+    0 12px 35px rgba(0,0,0,0.7),
+    0 30px 80px rgba(0,0,0,0.8);
+  border: 1px solid #caba9e;
+  border-bottom: 2px solid #9c8e76;
+  position: relative;
+  transform: rotate(-0.5deg);
+}
+
+/* Manila Folder tab */
+.main-content::before {
+  content: 'CASE NO. 47-XXY';
+  position: absolute;
+  top: -24px;
+  left: 30px;
+  width: 220px;
+  height: 25px;
+  background-color: #dfcdb4;
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  border: 1px solid #caba9e;
+  border-bottom: none;
+  font-family: var(--font-file);
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.15rem;
+  color: #4a3e31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.15);
+}
+
+/* 커피 자국 데코 */
+.main-content .deco-coffee {
+  top: 40px;
+  right: 50px;
+}
+
+/* 마스킹 테이프 데코 */
+.main-content .deco-tape {
+  top: -12px;
+  right: 60px;
+  width: 120px;
+  height: 25px;
+  background: rgba(220, 195, 150, 0.45);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  transform: rotate(5deg);
+}
+
+.main-label {
+  display: inline-block;
+  font-size: 1.6rem;
+  letter-spacing: 0.4rem;
+  color: #a22;
+  border: 5px double #a22;
+  padding: 0.5rem 1.8rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: var(--font-file);
+  margin-bottom: 2rem;
+  transform: rotate(-4deg);
+  opacity: 0.95;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.main-title {
+  font-size: 4rem;
+  letter-spacing: 0.3rem;
+  color: #1a1612;
+  font-weight: 700;
+  font-family: var(--font-title);
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+.main-tagline {
+  font-size: 1.1rem;
+  color: #4a3f34;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+  letter-spacing: 0.05rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.main-start-btn {
+  background: #a22;
+  background-image: radial-gradient(circle, #b33 0%, #8b1e1e 100%);
+  color: #fff;
+  border: none;
+  padding: 1rem 3.5rem;
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.25rem;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.3),
+    0 4px 10px rgba(139,30,30,0.4);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #700;
+}
+
+.main-start-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.main-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.3),
+    0 8px 18px rgba(139,30,30,0.5);
+  background-image: radial-gradient(circle, #be3a3a 0%, #9c1f1f 100%);
+}
+
+.main-start-btn:hover::after {
+  opacity: 1;
+}
+
+.main-start-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.main-footer {
+  font-size: 0.85rem;
+  color: #635747;
+  letter-spacing: 0.08rem;
+  margin-top: 4rem;
+  border-top: 1px dashed rgba(80,50,20,0.15);
+  padding-top: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+/* 클립 데코 위치 조정 (바인더 클립 상단 막대 형태에 맞춤) */
+.main-content .ds-metal-clip {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+}

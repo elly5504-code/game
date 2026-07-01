@@ -1,0 +1,46 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  letter-spacing: 0.3rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-dim);
+  margin-bottom: 2rem;
+  letter-spacing: 0.1rem;
+}
+
+.page-button {
+  background-color: var(--color-paper-light);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 2rem;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.page-button:hover {
+  background-color: var(--color-accent);
+}
+
+.page-nav {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}

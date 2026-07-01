@@ -1,0 +1,968 @@
+html {
+  font-size: 104%;
+}
+
+:root {
+  /* ===== 폰트 토큰 ===== */
+  --font-file: 'Special Elite', 'Courier New', monospace;      /* 타자기 문서 */
+  --font-title: 'Cinzel', 'Georgia', serif;                   /* 제목 */
+  --font-body: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; /* 본문(한국어 가독성) */
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;      /* 메타/번호 */
+
+  /* ===== 컬러 토큰 ===== */
+  --color-bg: #1a120c;            /* 어두운 원목 책상 */
+  --color-paper: #f0e6d2;          /* 마닐라 파일 */
+  --color-paper-light: #fdfaf2;    /* 수사 보고서 */
+  --color-paper-dark: #ccb997;     /* 오래된 갱지/잠긴 파일 */
+  --color-paper-manila: #dfcdb4;   /* 폴더 본지 */
+
+  --color-text: #e1d3b3;           /* 다크 UI 본문 */
+  --color-text-dark: #221d17;      /* 문서 내부 잉크 */
+  --color-ink: #2b241c;            /* 보고서 본문 잉크 */
+  --color-ink-soft: #4a3e31;       /* 보조 잉크 */
+  --color-text-dim: #9b8a6f;       /* 다크 UI 보조 */
+
+  --color-stamp: #931a1a;          /* 도장 적색 */
+  --color-accent: #a22;            /* 강조 적색 */
+  --color-accent-hover: #8b1a1a;
+  --color-gold: #c9a961;           /* 황동 강조 (소량) */
+  --color-gold-dim: #9b8a6f;
+
+  --color-border: #443525;
+  --color-border-paper: #c8bba0;
+  --color-border-paper-dark: #a89a80;
+  --color-cork: #6b4a32;
+  --color-locked: #8a6c4c;
+
+  /* ===== 간격 토큰 ===== */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+
+  /* ===== 모서리 토큰 ===== */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-folder: 4px 30px 4px 4px;
+  --radius-lg: 8px;
+
+  /* ===== 그림자 토큰 ===== */
+  --shadow-card: 0 4px 10px rgba(0, 0, 0, 0.45), 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 10px 20px rgba(0, 0, 0, 0.5), 0 25px 60px rgba(0, 0, 0, 0.45);
+  --shadow-paper: 0 2px 5px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+  --shadow-polaroid: 0 3px 10px rgba(0, 0, 0, 0.4), 0 12px 35px rgba(0, 0, 0, 0.3);
+  --shadow-pin: 0 3px 5px rgba(0,0,0,0.5);
+  --shadow-stamp: 0 0 1px rgba(0,0,0,0.3);
+
+  /* ===== 테두리 토큰 ===== */
+  --border-dashed: 1px dashed rgba(201, 169, 97, 0.3);
+  --border-paper: 1px solid var(--color-border-paper);
+  --border-stamp-double: 4px double var(--color-accent);
+
+  /* ===== 애니메이션 토큰 ===== */
+  --ease-paper: cubic-bezier(0.19, 1, 0.22, 1);
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s var(--ease-paper);
+  --transition-page: 0.65s var(--ease-paper);
+
+  /* ===== 레이아웃 브레이크포인트 ===== */
+  --bp-desktop: 1440px;
+  --bp-tablet-wide: 1024px;
+  --bp-tablet: 768px;
+  --bp-mobile: 390px;
+
+  /* ===== 종이 질감 ===== */
+  --paper-texture: linear-gradient(135deg, #f5ecd6 0%, #eddcb9 100%);
+  --paper-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 0 0.65 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E");
+  --wood-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='wn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23wn)'/%3E%3C/svg%3E");
+  --cork-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='cn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.32 0 0 0 0 0.22 0 0 0 0 0.14 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23cn)'/%3E%3C/svg%3E");
+
+  /* 기본 폰트 */
+  font-family: var(--font-body);
+  word-break: keep-all;       /* 한국어 장문 줄바꿈 안정성 */
+  overflow-wrap: break-word;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 폼 요소가 브라우저 기본 폰트(굴림체)를 사용하지 않도록 강제 상속 */
+button,
+input,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+/* placeholder도 동일 폰트 적용 */
+button::placeholder,
+input::placeholder,
+textarea::placeholder {
+  font-family: inherit;
+  color: var(--color-text-dim);
+  opacity: 1;
+}
+
+/* 어두운 나무 책상 + 가죽 데스크매트 + 빈티지 질감 + 약한 노이즈 */
+body {
+  cursor: url('./assets/cursor-magnifier.svg') 10 10, auto;
+  background-color: var(--color-bg);
+  background-image:
+    var(--wood-noise),
+    /* 나무결 가로결 디테일 */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.14) 0px,
+      rgba(0,0,0,0.07) 3px,
+      transparent 6px,
+      transparent 90px,
+      rgba(0,0,0,0.09) 92px,
+      transparent 96px,
+      transparent 180px
+    ),
+    /* 나무결 세로결 미세결 */
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.05) 0px,
+      transparent 2px,
+      transparent 8px
+    ),
+    /* 어두운 나무결 그라데이션 */
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.35) 0%,
+      rgba(0,0,0,0.12) 50%,
+      rgba(0,0,0,0.45) 100%
+    ),
+    radial-gradient(circle at 50% 45%, #2c1d13 0%, #140d08 100%);
+  color: var(--color-text);
+  min-height: 100vh;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* 전체 화면 위에 약한 빈티지 노이즈 오버레이 (마우스 상호작용 방해 X) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: var(--wood-noise);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+/* 스크롤바 디자인 */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #140d08;
+}
+::-webkit-scrollbar-thumb {
+  background: #473629;
+  border: 3px solid #140d08;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #634d3d;
+}
+
+a {
+  color: var(--color-gold);
+  text-decoration: none;
+  font-family: var(--font-mono);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   오브젝트 데코레이션 (종이 질감, 자국, 클립, 테이프, 도장)
+   ======================================== */
+
+/* 가죽 데스크패드 컨테이너 (레이어 보드) */
+.desk-pad {
+  max-width: 1300px;
+  width: 95%;
+  margin: 2rem auto;
+  background: #1d1814;
+  border: 14px solid #100c09;
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.85),
+    inset 0 0 60px rgba(0,0,0,0.4),
+    0 10px 40px rgba(0, 0, 0, 0.9),
+    0 30px 80px rgba(0,0,0,0.7);
+  border-radius: 14px;
+  position: relative;
+  min-height: 85vh;
+  padding: 2.5rem;
+  background-image:
+    var(--cork-noise),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* 가죽 테두리 스티치 느낌 */
+.desk-pad::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px dashed rgba(201, 169, 97, 0.12);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* 브라운 빈티지 마닐라 폴더 스타일 카드 */
+.ds-folder {
+  background-color: #dfcdb4;
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  color: #1a1612;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  border-radius: 4px 24px 4px 4px;
+  border: 1px solid #caba9e;
+  border-bottom: 2px solid #a89a80;
+}
+
+.ds-folder::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  width: 80px;
+  height: 15px;
+  background-color: #dfcdb4;
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  border: 1px solid #caba9e;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  z-index: -1;
+}
+
+/* 황백색 수사 기록 종이 */
+.ds-document {
+  background-color: #f7f3e8;
+  background-image:
+    var(--paper-noise),
+    radial-gradient(circle at 10% 10%, rgba(200, 180, 150, 0.15) 0%, transparent 100%),
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: auto, auto, 100% 2rem;
+  background-blend-mode: multiply;
+  color: #241f17;
+  padding: 3rem 2rem;
+  border: 1px solid #ebe2cf;
+  position: relative;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  box-shadow:
+    2px 2px 0px rgba(0,0,0,0.1),
+    4px 4px 0px rgba(0,0,0,0.08),
+    1px 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* 지저분한 커피 자국 */
+.ds-coffee-stain {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border: 2px solid rgba(139, 90, 43, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  filter: blur(1px);
+  transform: rotate(25deg);
+}
+
+.ds-coffee-stain::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 1px solid rgba(139, 90, 43, 0.07);
+  border-radius: 50%;
+}
+
+.ds-coffee-stain::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(ellipse, rgba(139, 90, 43, 0.08) 0%, transparent 80%);
+  border-radius: 50%;
+}
+
+/* 커피 한방울 번진 자국 */
+.ds-grease-stain {
+  position: absolute;
+  width: 45px;
+  height: 35px;
+  background: radial-gradient(ellipse, rgba(100, 60, 20, 0.13) 0%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 수사관 마스킹 테이프 */
+.ds-tape-strip {
+  position: absolute;
+  width: 90px;
+  height: 24px;
+  background: rgba(224, 204, 161, 0.35);
+  backdrop-filter: blur(0.5px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-left: 2px dashed rgba(224, 204, 161, 0.1);
+  border-right: 2px dashed rgba(224, 204, 161, 0.1);
+  transform: rotate(-3deg);
+  z-index: 10;
+  cursor: default;
+}
+
+.ds-tape-strip.angle-right {
+  transform: rotate(4deg);
+}
+
+.ds-tape-strip.vertical-tape {
+  width: 25px;
+  height: 70px;
+  transform: rotate(-1deg);
+}
+
+/* 빈티지 메탈 바인더 클립 (실제 클립 형태: 상단 막대 + 양쪽 휘어진 다리) */
+.ds-metal-clip {
+  position: absolute;
+  width: 30px;
+  height: 9px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  z-index: 30;
+  /* 상단 금속 막대 */
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.08) 35%,
+      transparent 55%
+    ),
+    linear-gradient(180deg, #686868 0%, #484848 40%, #2c2c2c 100%);
+  border-radius: 3px 3px 1px 1px;
+  border: 1px solid #1a1a1a;
+  box-shadow:
+    0 3px 5px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* 왼쪽 다리 (아래로 휘어진 금속판) */
+.ds-metal-clip::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 1px;
+  width: 8px;
+  height: 30px;
+  background:
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      transparent 40%
+    ),
+    linear-gradient(180deg, #555 0%, #383838 50%, #222 100%);
+  border-radius: 1px 1px 5px 5px;
+  border: 1px solid #1a1a1a;
+  border-top: none;
+  transform: skewX(-10deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* 오른쪽 다리 (아래로 휘어진 금속판) */
+.ds-metal-clip::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  right: 1px;
+  width: 8px;
+  height: 30px;
+  background:
+    linear-gradient(90deg,
+      transparent 60%,
+      rgba(255, 255, 255, 0.25) 100%
+    ),
+    linear-gradient(180deg, #555 0%, #383838 50%, #222 100%);
+  border-radius: 1px 1px 5px 5px;
+  border: 1px solid #1a1a1a;
+  border-top: none;
+  transform: skewX(10deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* 빈티지 빨간색 압정 */
+.ds-pushpin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f44 0%, #aa1a1a 70%, #500 100%);
+  box-shadow:
+    0 1px 1px rgba(255,255,255,0.7),
+    0 3px 5px rgba(0,0,0,0.6);
+  z-index: 40;
+  cursor: default;
+}
+
+.ds-pushpin::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  bottom: -7px;
+  left: 7px;
+  transform: rotate(15deg);
+  transform-origin: top center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.8);
+}
+
+/* 검은 압정 변형 */
+.ds-pushpin.dark {
+  background: radial-gradient(circle at 35% 35%, #555 0%, #222 70%, #000 100%);
+}
+
+/* 수사 도장 프레임웍 (강화된 고무 도장 질감) */
+.ds-rubber-stamp {
+  display: inline-block;
+  font-family: var(--font-file);
+  padding: 0.45rem 1.1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.28rem;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px currentColor;
+  transform: rotate(-6deg);
+  mask-image: radial-gradient(circle, rgba(0,0,0,0.88) 55%, rgba(0,0,0,0.35) 100%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,0.88) 55%, rgba(0,0,0,0.35) 100%);
+  background-blend-mode: multiply;
+  margin: 10px;
+  opacity: 0.92;
+  filter: contrast(1.05);
+}
+
+.ds-rubber-stamp.confidential {
+  color: #a33;
+  border: 4px double #a33;
+  transform: rotate(-4deg);
+  font-size: 1.1rem;
+}
+
+.ds-rubber-stamp.solved {
+  color: #2e6224;
+  border: 5px double #2e6224;
+  transform: rotate(6deg);
+  font-size: 1.4rem;
+  letter-spacing: 0.35rem;
+  padding: 0.6rem 1.6rem;
+}
+
+.ds-rubber-stamp.top-secret {
+  color: #ab2828;
+  border: 4px solid #ab2828;
+  transform: rotate(-10deg);
+  font-size: 1rem;
+}
+
+.ds-rubber-stamp.open-case {
+  color: #a77c1d;
+  border: 4px solid #a77c1d;
+  transform: rotate(2deg);
+  font-size: 0.9rem;
+}
+
+.ds-rubber-stamp.evidence {
+  color: #3a5a8a;
+  border: 3px solid #3a5a8a;
+  transform: rotate(-3deg);
+  font-size: 0.85rem;
+}
+
+.ds-rubber-stamp.classified {
+  color: #6a3a8a;
+  border: 4px double #6a3a8a;
+  transform: rotate(8deg);
+  font-size: 0.95rem;
+}
+
+/* 수첩용 노란색 포스트잇 */
+.ds-sticky-note {
+  background-color: #fbf5b0;
+  background-image:
+    var(--paper-noise),
+    linear-gradient(#fdfcd0 0%, #fbf5b0 100%);
+  color: #2b2715;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.1),
+    0 8px 18px rgba(0,0,0,0.25);
+  font-family: var(--font-body);
+  border-left: 1px solid rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  position: relative;
+  transform: rotate(1deg);
+  border-radius: 1px;
+}
+
+/* 가죽수첩 스프링 링 */
+.ds-spiral-notebook {
+  background: #fdfcee;
+  background-image:
+    var(--paper-noise),
+    repeating-linear-gradient(#fdfcee, #fdfcee 22px, #cde3f4 23px);
+  border: 1px solid #dfd8c9;
+  box-shadow: var(--shadow-card);
+  border-radius: 4px;
+  color: #2b241c;
+  padding: 2.5rem 1.8rem;
+  position: relative;
+}
+
+.ds-spiral-notebook::before {
+  content: '••••••••••••••••••••••••••••';
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.35rem;
+  color: #71695c;
+  height: 20px;
+  overflow: hidden;
+  font-family: monospace;
+}
+
+/* 폴라로이드 사진 수사 인화지 */
+.ds-polaroid-photo {
+  background-color: #faf6ed;
+  background-image: var(--paper-noise);
+  padding: 0.75rem 0.75rem 2.2rem;
+  border: 1px solid #dfd9cc;
+  box-shadow: var(--shadow-polaroid);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-polaroid-photo .photo-area {
+  background-color: #171412;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #3d3731;
+}
+
+.ds-polaroid-photo .photo-caption {
+  font-family: var(--font-file);
+  font-size: 0.8rem;
+  color: #3d3128;
+  text-align: center;
+  margin-top: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 빨간색 추적 실 */
+.ds-red-thread {
+  position: absolute;
+  background-color: rgba(162, 34, 34, 0.75);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  z-index: 35;
+  height: 2px;
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ========================================
+   페이지 페이드 슬라이드 트랜지션 (수사 파일 넘기는 효과)
+   ======================================== */
+@keyframes slide-file-turn {
+  0% {
+    transform: perspective(1200px) rotateY(-10deg) translateX(40px) scale(0.97);
+    opacity: 0.25;
+    filter: blur(2px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) translateX(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.brief-wrapper, .select-wrapper, .inv-wrapper, .report-wrapper, .eval-wrapper, .expl-wrapper {
+  animation: slide-file-turn 0.65s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* ========================================
+   사이드바 수사관 수첩 포스트잇용
+   ======================================== */
+.detective-pencil-font {
+  font-family: 'Courier New', var(--font-mono);
+  font-weight: bold;
+}
+
+/* ========================================
+   공통: 코르크 보드 배경 (증거 보드용)
+   ======================================== */
+.cork-board {
+  background-color: #6b4a32;
+  background-image:
+    var(--cork-noise),
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #6b4a32 0%, #4a3220 100%);
+  border: 8px solid #3a2418;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,0.5),
+    inset 0 0 8px rgba(0,0,0,0.4),
+    0 6px 24px rgba(0,0,0,0.6);
+  border-radius: 6px;
+  position: relative;
+}
+
+/* ========================================
+   공통 접근성 / 포커스 / 동작 감소
+   ======================================== */
+
+/* 키보드 포커스 링 (명도 대비 확보) */
+*:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 장식용 의사 요소는 포커스 링 제거 */
+.ds-coffee-stain:focus-visible,
+.ds-grease-stain:focus-visible,
+.ds-tape-strip:focus-visible,
+.ds-metal-clip:focus-visible,
+.ds-pushpin:focus-visible,
+.ds-red-thread:focus-visible {
+  outline: none;
+}
+
+/* 화면 외 숨김 (스크린리더 전용) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* prefers-reduced-motion: 불필요한 애니메이션 제거 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .brief-wrapper,
+  .select-wrapper,
+  .inv-wrapper,
+  .report-wrapper,
+  .eval-wrapper,
+  .expl-wrapper {
+    animation: none;
+  }
+
+  .case-file,
+  .main-content {
+    transform: none !important;
+  }
+}
+
+/* ========================================
+   공통 버튼 시스템
+   ======================================== */
+
+/* 기본 보고서 버튼 (종이 위 검정 잉크) */
+.btn-paper {
+  display: inline-block;
+  background: var(--color-paper-light);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-decoration: none;
+}
+.btn-paper:hover {
+  background: var(--color-paper);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-paper);
+  text-decoration: none;
+}
+.btn-paper:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.btn-paper:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 수사 도장 버튼 (빨간 도장 형태) */
+.btn-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--color-accent);
+  border: var(--border-stamp-double);
+  padding: 0.5rem 1.4rem;
+  font-family: var(--font-file);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  text-decoration: none;
+}
+.btn-stamp:hover {
+  background: rgba(170, 34, 34, 0.08);
+  transform: rotate(0deg) scale(1.04);
+  text-decoration: none;
+}
+.btn-stamp:active {
+  transform: rotate(-3deg) scale(0.98);
+}
+.btn-stamp:focus-visible {
+  outline-offset: 4px;
+}
+.btn-stamp:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: rotate(-3deg);
+  background: transparent;
+  filter: grayscale(0.4);
+}
+
+/* 파일 라벨 버튼 (마닐라 탭 형태) */
+.btn-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-paper-manila);
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-border-paper-dark);
+  padding: 0.45rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  text-decoration: none;
+}
+.btn-label:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.btn-label:active {
+  transform: translateY(1px);
+}
+.btn-label:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   공통: 사건 파일 컨테이너 (CaseSelect/전역 재사용)
+   ======================================== */
+.case-file {
+  position: relative;
+  background: var(--color-paper);
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  color: var(--color-ink);
+  border: 1px solid var(--color-border-paper);
+  border-radius: var(--radius-folder);
+  padding: 2.2rem 1.8rem 1.8rem;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  transform: rotate(var(--rotate-deg, -1deg));
+}
+
+/* 마닐라 파일 상단 인덱스 탭 (공통) */
+.case-file::before {
+  content: attr(data-tab, 'FILE');
+  position: absolute;
+  top: -18px;
+  left: 20px;
+  width: 90px;
+  height: 18px;
+  background: var(--color-paper);
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  border: 1px solid var(--color-border-paper);
+  border-bottom: none;
+  font-family: var(--font-file);
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  color: var(--color-ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+/* ========================================
+   공통: 폴라로이드 / 메모지 (전역 재사용)
+   ======================================== */
+.polaroid {
+  background-color: #faf6ed;
+  background-image: var(--paper-noise);
+  padding: 0.75rem 0.75rem 2.2rem;
+  border: 1px solid #dfd9cc;
+  box-shadow: var(--shadow-polaroid);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.polaroid .photo-area {
+  background-color: #171412;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #3d3731;
+}
+.polaroid .photo-caption {
+  font-family: var(--font-file);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+  text-align: center;
+  margin-top: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.memo-note {
+  background-color: #fbf5b0;
+  background-image:
+    var(--paper-noise),
+    linear-gradient(#fdfcd0 0%, #fbf5b0 100%);
+  color: #2b2715;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 8px 18px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-body);
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  position: relative;
+  transform: rotate(1deg);
+  border-radius: 1px;
+}
+
+/* ========================================
+   공통: 반응형 레이아웃 보조
+   ======================================== */
+@media (max-width: 1024px) {
+  .desk-pad {
+    max-width: 96%;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .desk-pad {
+    max-width: 100%;
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1.5rem 1.2rem;
+    border-width: 10px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .desk-pad {
+    margin: 0;
+    padding: 1rem 0.8rem;
+    border-width: 8px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  body {
+    font-size: 0.95rem;
+  }
+}

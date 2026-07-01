@@ -1,0 +1,10 @@
+const fs = require('fs')
+const f = fs.readFileSync('src/pages/CaseSelect.jsx', 'utf8')
+
+// </p> 다음 줄에 돋보기 장식 추가
+const oldStr = '담당할 사건을 선택하세요.</span>\n        </p>'
+const newStr = '담당할 사건을 선택하세요.</span>\n        </p>\n\n        {/* 돋보기 장식 (오른쪽 아래 빈 공간) */}\n        <div className="ds-magnifier" aria-hidden="true">\n          <span className="ds-magnifier-handle" />\n        </div>'
+
+const result = f.replace(oldStr, newStr)
+fs.writeFileSync('src/pages/CaseSelect.jsx', result, 'utf8')
+console.log('done')

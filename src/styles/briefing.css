@@ -1,0 +1,502 @@
+/* ===== CaseBriefing 화면 전용 스타일 (사건 기록실 세계관) ===== */
+
+.brief-wrapper {
+  min-height: 100vh;
+  background: transparent;
+  color: var(--color-text);
+  padding: 1rem 1rem 4rem;
+  font-family: var(--font-body);
+}
+
+/* ===== 상단 헤더 ===== */
+.brief-header {
+  max-width: 860px;
+  margin: 0 auto 1.5rem;
+  border-bottom: var(--border-dashed);
+  padding-bottom: 1.25rem;
+}
+
+.brief-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brief-header-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brief-header-label {
+  font-size: 1.5rem;
+  letter-spacing: 0.3rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  font-family: var(--font-title);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+.brief-header-confidential {
+  font-size: 0.8rem;
+  letter-spacing: 0.3rem;
+  color: var(--color-accent);
+  border: var(--border-stamp-double);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-family: var(--font-file);
+  transform: rotate(-4deg);
+  box-shadow: var(--shadow-stamp);
+}
+
+.brief-header-back {
+  font-size: 0.9rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(201, 169, 97, 0.4);
+  cursor: pointer;
+  font-family: var(--font-file);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brief-header-back:hover {
+  color: #fff;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* ===== 사건 기록철 (여러 장의 문서 겹침) ===== */
+.brief-record-stack {
+  max-width: 860px;
+  margin: 2rem auto 0;
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+/* 뒤쪽 문서(배경) - 살짝 어긋난 수사 서류 */
+.brief-bg-doc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-paper-dark);
+  background-image: var(--paper-noise), var(--paper-texture);
+  background-blend-mode: multiply;
+  border: 1px solid var(--color-border-paper-dark);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-2deg) translate(-12px, 8px);
+  height: 100%;
+  min-height: 480px;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.brief-bg-doc::after {
+  content: 'EVIDENCE LOG';
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  font-family: var(--font-file);
+  font-size: 0.8rem;
+  letter-spacing: 0.2rem;
+  color: var(--color-ink-soft);
+  opacity: 0.6;
+}
+
+/* 메인 수사 보고서 */
+.brief-file {
+  position: relative;
+  z-index: 2;
+  background: var(--color-paper-light);
+  background-image:
+    var(--paper-noise),
+    radial-gradient(circle at 85% 85%, rgba(139, 90, 43, 0.08) 0%, transparent 100%),
+    linear-gradient(var(--color-paper-light) 0%, #f7f2e1 100%);
+  color: var(--color-ink);
+  border: 1px solid #dfd3c0;
+  padding: 3rem 3rem 2.5rem;
+  box-shadow:
+    2px 2px 0px #eddcb9,
+    4px 4px 0px #dfccb4,
+    1px 8px 30px rgba(0, 0, 0, 0.5);
+  transform: rotate(0.4deg);
+  border-radius: var(--radius-sm);
+}
+
+/* 장식: 커피 자국 (한 곳만) */
+.brief-file .deco-coffee {
+  top: -20px;
+  right: -25px;
+  opacity: 0.6;
+  width: 90px;
+  height: 90px;
+}
+
+/* 장식: 마스킹 테이프 (양쪽 한 번만) */
+.brief-file .deco-tape-1 {
+  top: -12px;
+  left: 20%;
+  width: 100px;
+  height: 24px;
+  transform: rotate(-4deg);
+}
+
+.brief-file .deco-tape-2 {
+  top: -12px;
+  right: 20%;
+  width: 100px;
+  height: 24px;
+  transform: rotate(5deg);
+}
+
+/* ===== 파일 상단: CASE 번호 + CONFIDENTIAL 도장 ===== */
+.brief-file-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(80, 50, 20, 0.15);
+  position: relative;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brief-file-case-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.brief-file-case-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.25rem;
+  color: var(--color-ink-soft);
+  font-family: var(--font-file);
+  text-transform: uppercase;
+}
+
+.brief-file-case-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  font-family: var(--font-title);
+  letter-spacing: 0.05rem;
+  line-height: 1.3;
+  text-shadow: 0.5px 1px 0px #fff;
+  word-break: keep-all;
+}
+
+.brief-file-stamp {
+  display: inline-block;
+  font-family: var(--font-file);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.28rem;
+  color: var(--color-accent);
+  border: 4px double var(--color-accent);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-md);
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  pointer-events: none;
+  opacity: 0.92;
+  background: rgba(170, 34, 34, 0.04);
+  align-self: flex-end;
+}
+
+/* ===== 본문 영역: 폴라로이드 + 정보 테이블 ===== */
+.brief-body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+/* 폴라로이드 증거 사진 */
+.brief-polaroid {
+  background-color: #faf6ed;
+  background-image: var(--paper-noise);
+  padding: 0.75rem 0.75rem 2.2rem;
+  border: 1px solid #dfd9cc;
+  box-shadow: var(--shadow-polaroid);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transform: rotate(-2deg);
+}
+
+.brief-polaroid .photo-area {
+  background-color: #171412;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #3d3731;
+}
+
+.brief-polaroid .photo-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brief-polaroid .photo-placeholder {
+  font-family: var(--font-file);
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  text-align: center;
+  padding: 0.5rem;
+  line-height: 1.4;
+}
+
+.brief-polaroid .photo-caption {
+  font-family: var(--font-file);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
+/* 사건 정보 테이블 */
+.brief-info-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem 2rem;
+  padding: 1.5rem 1.8rem;
+  background: rgba(80, 50, 20, 0.04);
+  border: 1px dashed rgba(80, 50, 20, 0.25);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+}
+
+.brief-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.brief-info-key {
+  font-size: 0.78rem;
+  font-weight: bold;
+  letter-spacing: 0.12rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.brief-info-val {
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  font-weight: bold;
+  line-height: 1.4;
+  border-bottom: 1px dotted rgba(80, 50, 20, 0.15);
+  padding-bottom: 0.25rem;
+  word-break: keep-all;
+}
+
+/* ===== 사건 개요 (보고서 본문) ===== */
+.brief-summary-section {
+  margin-bottom: 2.5rem;
+  padding: 0 0.3rem;
+}
+
+.brief-summary-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #5c412e;
+  letter-spacing: 0.12rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2.5px double rgba(80, 50, 20, 0.2);
+  font-family: var(--font-title);
+}
+
+.brief-summary-text {
+  font-size: 1.08rem;
+  line-height: 2;
+  color: var(--color-ink);
+  letter-spacing: 0.01rem;
+  text-align: justify;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-family: var(--font-body);
+}
+
+/* ===== 조사 목표 (있는 경우) ===== */
+.brief-objectives {
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(201, 169, 97, 0.06);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.brief-objectives-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12rem;
+  color: var(--color-gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-file);
+}
+
+.brief-objectives-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.brief-objectives-list li {
+  font-size: 1.00rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  padding-left: 1.2rem;
+  position: relative;
+  word-break: keep-all;
+}
+
+.brief-objectives-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold-dim);
+}
+
+/* ===== 하단 버튼 ===== */
+.brief-footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1.5px dashed rgba(80, 50, 20, 0.15);
+}
+
+.brief-start-btn {
+  background: transparent;
+  color: var(--color-accent);
+  border: 5px double var(--color-accent);
+  padding: 0.85rem 3.5rem;
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.25rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+  transform: rotate(-1.5deg);
+  text-transform: uppercase;
+}
+
+.brief-start-btn:hover {
+  background: rgba(170, 34, 34, 0.07);
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.brief-start-btn:active {
+  transform: rotate(-1.5deg) scale(0.98);
+}
+
+.brief-start-btn:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1024px) {
+  .brief-file {
+    padding: 2.5rem 2.2rem 2rem;
+  }
+  .brief-file-case-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .brief-body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .brief-polaroid {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+  .brief-info-table {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .brief-header-label {
+    font-size: 1.25rem;
+  }
+  .brief-file-case-title {
+    font-size: 1.6rem;
+  }
+  .brief-file {
+    transform: rotate(0deg);
+    padding: 2rem 1.5rem 1.8rem;
+  }
+  .brief-bg-doc {
+    display: none;
+  }
+  .brief-summary-text {
+    line-height: 1.8;
+  }
+}
+
+@media (max-width: 390px) {
+  .brief-wrapper {
+    padding: 0.5rem 0.5rem 3rem;
+  }
+  .brief-header-label {
+    font-size: 1.05rem;
+    letter-spacing: 0.2rem;
+  }
+  .brief-file-case-title {
+    font-size: 1.35rem;
+  }
+  .brief-file-stamp {
+    font-size: 0.9rem;
+    letter-spacing: 0.2rem;
+  }
+  .brief-start-btn {
+    font-size: 1.1rem;
+    padding: 0.7rem 2.2rem;
+    letter-spacing: 0.15rem;
+  }
+  .brief-summary-text {
+    font-size: 0.95rem;
+  }
+  .brief-polaroid {
+    max-width: 180px;
+  }
+}
+
+/* 동작 감소 */
+@media (prefers-reduced-motion: reduce) {
+  .brief-file,
+  .brief-bg-doc,
+  .brief-polaroid,
+  .brief-file-stamp,
+  .brief-start-btn {
+    transform: none !important;
+  }
+}
