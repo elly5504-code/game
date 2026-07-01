@@ -619,6 +619,71 @@
   color: var(--color-text-dim);
 }
 
+/* 익명화된 용의자 카드 (특정 사건 스포일러 방지 + '4인 중 1인 지목' 개념) */
+.lp-mugshot-anon .lp-mugshot-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(201, 169, 97, 0.09) 0%, transparent 62%),
+    repeating-linear-gradient(45deg, #14100b 0 10px, #100c08 10px 20px);
+}
+.lp-mugshot-unknown {
+  font-family: var(--font-title);
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: rgba(201, 169, 97, 0.5);
+  line-height: 1;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+.lp-mugshot-anon:hover .lp-mugshot-unknown {
+  color: rgba(201, 169, 97, 0.85);
+  transform: scale(1.08);
+}
+.lp-mugshot-target {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-family: var(--font-file);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12rem;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  border-radius: 3px;
+  padding: 0.1rem 0.45rem;
+  background: rgba(20, 13, 8, 0.55);
+  transform: rotate(7deg) scale(0.82);
+  opacity: 0;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+.lp-mugshot-anon:hover .lp-mugshot-target {
+  opacity: 0.95;
+  transform: rotate(-6deg) scale(1);
+}
+.lp-suspect-note {
+  max-width: 1080px;
+  margin: 1.9rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-file);
+  font-size: 0.92rem;
+  letter-spacing: 0.03rem;
+  color: var(--color-gold);
+  text-align: center;
+  word-break: keep-all;
+}
+.lp-suspect-note svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+.lp-suspect-note strong { color: #f3e8cf; }
+
 /* =========================================================
    AI 스포트라이트
    ========================================================= */

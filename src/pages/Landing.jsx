@@ -28,6 +28,7 @@ const IconChevron = (p) => <Icon {...p} path={<><path d="M6 9l6 6 6-6" /></>} />
 const IconUsers = (p) => <Icon {...p} path={<><circle cx="9" cy="8" r="3.5" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" /><path d="M16 5.5a3.5 3.5 0 0 1 0 6.9M21 20c0-2.6-1.6-4.8-4-5.6" /></>} />
 const IconClock = (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>} />
 const IconLock = (p) => <Icon {...p} path={<><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></>} />
+const IconTarget = (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></>} />
 
 /* ===== 수사 흐름 데이터 ===== */
 const FLOW_STEPS = [
@@ -198,26 +199,31 @@ function Landing() {
         </div>
       </section>
 
-      {/* ===== 용의자 라인업 ===== */}
+      {/* ===== 용의자 라인업 (사건별 용의자는 다름 → 익명화하여 '4인 중 1인 지목' 개념 전달) ===== */}
       <section className="lp-section lp-suspects">
         <div className="lp-section-head">
           <span className="lp-kicker">SUSPECT LINE-UP</span>
-          <h2 className="lp-section-title">이 중 한 명이, 범인입니다</h2>
-          <p className="lp-section-sub">저마다의 알리바이와 감춰진 동기. 거짓을 꿰뚫는 건 당신의 몫입니다.</p>
+          <h2 className="lp-section-title">용의자 4인 중, 단 한 명이 범인</h2>
+          <p className="lp-section-sub">모두가 그럴듯한 알리바이를 말합니다. 거짓을 꿰뚫고 진범 한 명을 지목하세요.</p>
         </div>
         <div className="lp-suspect-grid">
-          {case001.suspects.map((s) => (
-            <article key={s.name} className="lp-mugshot">
+          {[1, 2, 3, 4].map((n) => (
+            <article key={n} className="lp-mugshot lp-mugshot-anon">
               <div className="lp-mugshot-photo">
-                <img src={s.image} alt={`용의자 ${s.name}`} loading="lazy" />
+                <span className="lp-mugshot-unknown" aria-hidden="true">?</span>
                 <span className="lp-mugshot-scale" aria-hidden="true" />
+                <span className="lp-mugshot-target" aria-hidden="true">지목</span>
               </div>
               <div className="lp-mugshot-plate">
-                <span className="lp-mugshot-name">{s.name}</span>
-                <span className="lp-mugshot-job">{s.job}</span>
+                <span className="lp-mugshot-name">용의자 {String(n).padStart(2, '0')}</span>
+                <span className="lp-mugshot-job">신원 미상 · CLASSIFIED</span>
               </div>
             </article>
           ))}
+        </div>
+        <div className="lp-suspect-note">
+          <IconTarget />
+          <span>사건마다 용의자는 달라지고, 그 중 <strong>단 1명</strong>만이 진범입니다</span>
         </div>
       </section>
 
