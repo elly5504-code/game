@@ -27,8 +27,8 @@ const calcPartialScore = (matched, total, maxScore) => {
 
 // 등급 정의 (관대한 기준) - 이모지 대신 텍스트 등급 라벨 사용
 const GRADES = [
-  { id: 'legend', rank: 'S', name: '전설의 탐정', minScore: 75 },
-  { id: 'master', rank: 'A', name: '명탐정', minScore: 65 },
+  { id: 'legend', rank: 'S', name: '전설의 탐정', minScore: 70 },
+  { id: 'master', rank: 'A', name: '명탐정', minScore: 60 },
   { id: 'veteran', rank: 'B', name: '전문탐정', minScore: 40 },
   { id: 'rookie', rank: 'C', name: '초보탐정', minScore: 20 },
   { id: 'trainee', rank: 'D', name: '수습탐정', minScore: 0 },
